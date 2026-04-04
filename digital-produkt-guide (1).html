@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Produkt  Guiden uten bullshit</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e0e;
+    --surface: #161616;
+    --border: #2a2a2a;
+    --accent: #e8ff47;
+    --accent2: #ff6b35;
+    --text: #f0ede8;
+    --muted: #888;
+    --tag-bg: #1f1f1f;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.75;
+    font-size: 16px;
+  }
+
+  /* HEADER */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 2rem 2.5rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    line-height: 0.92;
+    letter-spacing: 0.01em;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 span {
+    color: var(--accent);
+  }
+
+  .intro-text {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.8;
+  }
+
+  .intro-text strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* NAV / TABLE OF CONTENTS */
+  .toc {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .toc-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .toc-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+  }
+
+  .toc-list a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    transition: all 0.15s;
+  }
+
+  .toc-list a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* MAIN CONTENT */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 3.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section:last-child { border-bottom: none; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: 0.02em;
+    line-height: 1;
+    color: var(--text);
+  }
+
+  h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    font-size: 0.82rem;
+    margin-bottom: 0.5rem;
+    margin-top: 2rem;
+  }
+
+  p {
+    color: #c8c4be;
+    margin-bottom: 1rem;
+  }
+
+  /* HIGHLIGHT BOX */
+  .highlight {
+    background: #141a00;
+    border-left: 3px solid var(--accent);
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .highlight p {
+    color: #d4e87a;
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  /* WARNING BOX */
+  .warning {
+    background: #1a0f00;
+    border-left: 3px solid var(--accent2);
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .warning p {
+    color: #ff9a6a;
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  /* CHECKLIST */
+  .checklist {
+    list-style: none;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .checklist li {
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #1e1e1e;
+    color: #c8c4be;
+    font-size: 0.95rem;
+  }
+
+  .checklist li:last-child { border-bottom: none; }
+
+  .check-icon {
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    position: relative;
+  }
+
+  /* STEPS */
+  .steps {
+    counter-reset: step;
+    margin: 1.5rem 0;
+  }
+
+  .step {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid #1a1a1a;
+    align-items: start;
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .step::before {
+    content: counter(step, decimal-leading-zero);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    padding-top: 3px;
+  }
+
+  .step-content strong {
+    display: block;
+    color: var(--text);
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .step-content p {
+    font-size: 0.9rem;
+    margin: 0;
+    color: var(--muted);
+  }
+
+  /* TAG */
+  .tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    margin-right: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .tag-green { background: #1a2e00; color: #8ecb3c; border: 1px solid #2e4a00; }
+  .tag-red { background: #2e0e00; color: #e07050; border: 1px solid #4a1a00; }
+  .tag-yellow { background: #2a2500; color: var(--accent); border: 1px solid #3d3500; }
+  .tag-blue { background: #001a2e; color: #5ab0e0; border: 1px solid #00284a; }
+
+  /* TWO-COL */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.2rem 1.4rem;
+  }
+
+  .card-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .card ul {
+    list-style: none;
+    font-size: 0.88rem;
+    color: #c8c4be;
+  }
+
+  .card ul li {
+    padding: 0.3rem 0;
+    border-bottom: 1px solid #1e1e1e;
+  }
+
+  .card ul li:last-child { border-bottom: none; }
+
+  .card ul li::before {
+    content: '→ ';
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* PRICE TABLE */
+  .price-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.88rem;
+  }
+
+  .price-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .price-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #1a1a1a;
+    color: #c8c4be;
+  }
+
+  .price-table tr:last-child td { border-bottom: none; }
+
+  .price-table td:first-child { color: var(--text); font-weight: 500; }
+
+  .em { color: var(--accent); font-weight: 600; }
+
+  /* FINAL CTA */
+  .cta-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2.5rem;
+    margin-top: 3rem;
+    text-align: center;
+  }
+
+  .cta-block h2 {
+    margin-bottom: 0.8rem;
+  }
+
+  .cta-block p {
+    color: var(--muted);
+    max-width: 500px;
+    margin: 0 auto;
+    font-size: 0.95rem;
+  }
+
+  code {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82em;
+    background: #1e1e1e;
+    color: var(--accent);
+    padding: 0.1em 0.4em;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+    header, main, .toc { padding-left: 1.2rem; padding-right: 1.2rem; }
+    h1 { font-size: 3.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Laget til Ida  med tanke på den idéen din</div>
+  <h1>Hei,<br><span>Ida.</span></h1>
+  <p class="intro-text">
+    Du har snakket om å prøve noe på egenhånd  selge noe digitalt, tjene litt på det du kan. <strong>Det er en god idé, og den er gjennomførbar.</strong> Denne guiden er laget spesielt til deg: ingen unødvendig fyll, ingen tomme fraser  bare det du faktisk trenger å vite for å komme i gang. Les den, bruk den, og gjør noe ut av det.
+  </p>
+</header>
+
+<nav class="toc">
+  <div class="toc-label">Innhold</div>
+  <ul class="toc-list">
+    <li><a href="#s1">01. Hva er dette egentlig?</a></li>
+    <li><a href="#s2">02. Velg riktig produkt</a></li>
+    <li><a href="#s3">03. Sjekk etterspørselen</a></li>
+    <li><a href="#s4">04. Lag produktet</a></li>
+    <li><a href="#s5">05. Pris det riktig</a></li>
+    <li><a href="#s6">06. Selg det</a></li>
+    <li><a href="#s7">07. Markedsføring</a></li>
+    <li><a href="#s8">08. Det juridiske</a></li>
+    <li><a href="#s9">09. Vanlige feil</a></li>
+    <li><a href="#s10">10. Kom i gang nå</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- SECTION 1 -->
+  <section class="section" id="s1">
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <h2>Hva er dette egentlig?</h2>
+    </div>
+
+    <p>Et digitalt produkt er noe du lager én gang og selger i ubegrenset antall  uten lager, uten frakt, uten at du trenger å gjøre noe hver gang noen kjøper.</p>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Typiske produkter</div>
+        <ul>
+          <li>E-bøker og PDF-guider</li>
+          <li>Maler (Word, Notion, Excel)</li>
+          <li>Nettkurs (video eller tekst)</li>
+          <li>Bilder, ikoner, fonter</li>
+          <li>Prompt-pakker (for AI)</li>
+          <li>Regneark og verktøy</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Fordeler vs fysisk handel</div>
+        <ul>
+          <li>Nullkostnad per salg</li>
+          <li>100% automatisert levering</li>
+          <li>Globalt marked fra dag én</li>
+          <li>Ingen lager eller logistikk</li>
+          <li>Passiv inntekt mulig</li>
+          <li>Kan testes billig</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="warning">
+      <p><strong>Realistisk forventning:</strong> Dette er ikke "tjen penger mens du sover" fra første dag. Det krever arbeid, tålmodighet og testing. Men potensialet for passiv inntekt er reelt  etter at grunnarbeidet er gjort.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section class="section" id="s2">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <h2>Velg riktig produkt</h2>
+    </div>
+
+    <p>Det største feilen folk gjør: de lager noe de selv synes er kult, uten å sjekke om noen vil betale for det. Start her  ikke med selve produktet.</p>
+
+    <h3>Tre spørsmål som avgjør alt</h3>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-content">
+          <strong>Løser det et konkret problem?</strong>
+          <p>Folk betaler for løsninger, ikke informasjon. "Hvordan spare penger" er informasjon. "Budsjettmal som viser deg nøyaktig hvor pengene forsvinner" er en løsning.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <strong>Har du noe å lære bort?</strong>
+          <p>Du trenger ikke være ekspert. Du trenger bare å kunne noe som andre ikke kan. En student som forstår Notion kan lage maler for folk som aldri har prøvd det.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <strong>Vil noen faktisk betale?</strong>
+          <p>Gratis informasjon finnes overalt. Det folk betaler for er spart tid, ferdig resultat, eller trygghet på at informasjonen er riktig og samlet på ett sted.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Velg én nisje  ikke vær generell</h3>
+    <p>En e-bok om "økonomi" selger dårlig. En e-bok om "spar penger som student på 3000 kr i måneden" selger bedre. Jo smalere og mer spesifikk målgruppe, jo lettere er det å nå dem og jo høyere konvertering.</p>
+
+    <div class="highlight">
+      <p><strong>Bruk dette rammeverket:</strong> [Problemet] + [Hvem] + [Tidsramme eller resultat] = produktidé som treffer. Eks: "Kom i gang med styrketrening  8-ukers program for kvinner over 30 uten gym-erfaring."</p>
+    </div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section class="section" id="s3">
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <h2>Sjekk etterspørselen</h2>
+    </div>
+
+    <p>Før du lager noe som helst, sjekk om noen faktisk vil ha det. Dette tar maks 2 timer og kan spare deg for uker med arbeid.</p>
+
+    <h3>Gratis verktøy for å validere</h3>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-content">
+          <strong>Google søketrend</strong>
+          <p>Gå til <code>trends.google.com</code> og søk på temaet ditt. Stiger kurven? Er det søkevolum? Da er det interesse der.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <strong>Se hva som allerede selger</strong>
+          <p>Gå til Etsy, Gumroad, Amazon Kindle eller Payhip. Søk på temaet ditt. Selges det mye? <strong>Bra</strong>  da er det bevist etterspørsel. Konkurranse er et godt tegn, ikke et dårlig.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <strong>Reddit og Facebook-grupper</strong>
+          <p>Finn grupper der målgruppen din er. Hva spør de om? Hva sliter de med? Hva klager de på? Der er produktidéer gratis.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <strong>Spør direkte</strong>
+          <p>Lag en kort Instagram-story eller Facebook-post. "Jeg vurderer å lage [produkt]. Ville du kjøpt det for [pris]?" Svar = data. Ikke svar = også data.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="warning">
+      <p><strong>Advarsel:</strong> Vennene dine sier alltid "det høres bra ut!"  de lyver ikke, de vil bare være snille. Det teller ikke. Det som teller er at noen faktisk betaler, eller i det minste sier "ja, jeg ville kjøpt det for X kroner" og gir en konkret pris.</p>
+    </div>
+
+    <h3>Minimumskrav for å gå videre</h3>
+    <ul class="checklist">
+      <li><span class="check-icon"></span>Det selges lignende produkter på én eller flere plattformer</li>
+      <li><span class="check-icon"></span>Det finnes søketrend (ikke nødvendigvis massivt, men jevnt)</li>
+      <li><span class="check-icon"></span>Du finner folk som stiller spørsmål om temaet online</li>
+      <li><span class="check-icon"></span>Du kan forklare hvem målgruppen er på én setning</li>
+    </ul>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section class="section" id="s4">
+    <div class="section-header">
+      <span class="section-number">04</span>
+      <h2>Lag produktet</h2>
+    </div>
+
+    <p>Nå lager du det. Viktig: <strong>perfeksjon er fienden</strong>. Lag en god, ferdig versjon. Ikke vent på at det skal bli perfekt  det blir det aldri.</p>
+
+    <h3>Verktøy etter produkttype</h3>
+
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Produkt</th>
+          <th>Verktøy</th>
+          <th>Kostnad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>E-bok / PDF-guide</td>
+          <td>Canva, Google Docs, Word</td>
+          <td class="em">Gratis</td>
+        </tr>
+        <tr>
+          <td>Notion-maler</td>
+          <td>Notion (gratis plan)</td>
+          <td class="em">Gratis</td>
+        </tr>
+        <tr>
+          <td>Excel / Google Sheets mal</td>
+          <td>Google Sheets</td>
+          <td class="em">Gratis</td>
+        </tr>
+        <tr>
+          <td>Nettkurs (video)</td>
+          <td>OBS Studio + Loom</td>
+          <td class="em">Gratis</td>
+        </tr>
+        <tr>
+          <td>Digitale bilder / grafikk</td>
+          <td>Canva Pro, Adobe</td>
+          <td>0–300 kr/mnd</td>
+        </tr>
+        <tr>
+          <td>Prompt-pakker</td>
+          <td>Bare en teksteditor</td>
+          <td class="em">Gratis</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Kvalitet: hva som faktisk teller</h3>
+    <ul class="checklist">
+      <li><span class="check-icon"></span>Innholdet løser det det lover å løse  ingenting annet teller</li>
+      <li><span class="check-icon"></span>Det er lett å lese / bruke  god struktur, korte avsnitt</li>
+      <li><span class="check-icon"></span>Det ser ryddig ut  ikke fancy, men konsistent og proft</li>
+      <li><span class="check-icon"></span>Ingen skrivefeil  bruk Grammarly eller be noen lese det</li>
+    </ul>
+
+    <div class="highlight">
+      <p><strong>Tips:</strong> Hvis du lager en e-bok  hold den kort og tett. 20 sider med genuint nyttig innhold selger bedre enn 80 sider der 60 er fyll. Folk har ikke tid. Lever resultatet raskt.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section class="section" id="s5">
+    <div class="section-header">
+      <span class="section-number">05</span>
+      <h2>Pris det riktig</h2>
+    </div>
+
+    <p>Prising er der de fleste bommet kraftig  enten for billig (signaliserer lav kvalitet) eller for dyrt (ingen kjøper det uten å kjenne deg).</p>
+
+    <h3>Utgangspunkt for prising</h3>
+
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Produkttype</th>
+          <th>Vanlig prisspenn</th>
+          <th>Kommentar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Enkel PDF-guide / mal</td>
+          <td>49 – 199 kr</td>
+          <td>Impulskjøp, lav terskel</td>
+        </tr>
+        <tr>
+          <td>Omfattende e-bok</td>
+          <td>149 – 499 kr</td>
+          <td>Avhenger av nisje og dybde</td>
+        </tr>
+        <tr>
+          <td>Malsamling / pakke</td>
+          <td>199 – 599 kr</td>
+          <td>Mer verdi = høyere pris ok</td>
+        </tr>
+        <tr>
+          <td>Nettkurs (kort)</td>
+          <td>499 – 1500 kr</td>
+          <td>Video gir oppfattet verdi</td>
+        </tr>
+        <tr>
+          <td>Nettkurs (komplett)</td>
+          <td>1500 – 5000 kr</td>
+          <td>Trenger troverdighet/publikum</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Tre prisstrategier</h3>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-content">
+          <strong>Lav pris for å bygge publikum</strong>
+          <p>Pris lavt (49–99 kr) for å få mange kjøpere, reviews og tillit. Gode anmeldelser er verdt mer enn marginen i starten.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <strong>Verdibasert prising</strong>
+          <p>Pris ut fra hva resultatet er verdt  ikke hva det kostet å lage. Sparer produktet ditt folk for 10 timer jobb? Da er 500 kr billig.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <strong>Produktpakker</strong>
+          <p>Selg enkeltprodukter, men tilby også en pakke med 2–3 produkter til "rabatt"  dette øker gjennomsnittlig ordresum uten ekstra arbeid.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="warning">
+      <p><strong>Ikke selg gratis for å teste markedet.</strong> Gratis er ikke et pristest  det er ingen test i det hele tatt. En person som ikke vil betale 49 kr er ikke en potensiell kunde.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 6 -->
+  <section class="section" id="s6">
+    <div class="section-header">
+      <span class="section-number">06</span>
+      <h2>Selg det  plattformer</h2>
+    </div>
+
+    <p>Du trenger en plattform som håndterer betaling og levering automatisk. Ikke bygg din egen nettbutikk til å begynne med  det er bortkastet tid.</p>
+
+    <h3>Anbefalte plattformer</h3>
+
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Plattform</th>
+          <th>Gebyr</th>
+          <th>Beste for</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Gumroad</td>
+          <td>10% per salg</td>
+          <td>Enkleste start, fungerer globalt</td>
+        </tr>
+        <tr>
+          <td>Payhip</td>
+          <td>5% (eller fast plan)</td>
+          <td>Billigere alternativ til Gumroad</td>
+        </tr>
+        <tr>
+          <td>Etsy</td>
+          <td>~8% + 2 kr/listing</td>
+          <td>Maler, design, kreative produkter</td>
+        </tr>
+        <tr>
+          <td>Teachable / Thinkific</td>
+          <td>0–8% avh. plan</td>
+          <td>Nettkurs med video</td>
+        </tr>
+        <tr>
+          <td>Lemonsqueezy</td>
+          <td>5% + 0,5 $ per salg</td>
+          <td>Moderne alternativ, god UI</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight">
+      <p><strong>Anbefaling for nybegynnere:</strong> Start med Gumroad. Det tar 30 minutter å sette opp, håndterer moms automatisk (viktig!), og du kan bruke resten av tiden på å faktisk selge  ikke bygge infrastruktur.(eller Shopify)</p>
+    </div>
+
+    <h3>Hva plattformen bør gjøre for deg</h3>
+    <ul class="checklist">
+      <li><span class="check-icon"></span>Ta imot betaling (kort, Vipps om mulig, PayPal)</li>
+      <li><span class="check-icon"></span>Sende produktet automatisk etter kjøp</li>
+      <li><span class="check-icon"></span>Håndtere mva / MVA (kritisk for EU/Norge-salg)</li>
+      <li><span class="check-icon"></span>Gi deg oversikt over salg og inntekt</li>
+    </ul>
+  </section>
+
+  <!-- SECTION 7 -->
+  <section class="section" id="s7">
+    <div class="section-header">
+      <span class="section-number">07</span>
+      <h2>Markedsføring</h2>
+    </div>
+
+    <p>Produktet selger ikke seg selv. Aldri. Du er nødt til å markedsføre  men du trenger ikke annonsere for en krone hvis du gjør det riktig.</p>
+
+    <h3>Organisk markedsføring  gratis, men krever tid</h3>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-content">
+          <strong>Instagram / TikTok  del prosessen, ikke produktet</strong>
+          <p>Vis hvem du er, hva du kan, og hva du hjelper folk med. Folk kjøper av folk de stoler på. "Slik laget jeg [produkt]" fungerer bedre enn "kjøp [produkt]".</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <strong>Pinterest  undervurdert og søkbart</strong>
+          <p>Pins lever i årevis og drives av søk. Perfekt for maler, design, oppskrifter, guider. Lag pins som lenker direkte til produktsiden din.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <strong>SEO  Google er gratis trafikk</strong>
+          <p>Skriv en bloggpost (eller Substack/Medium) om temaet ditt. Folk som googler problemet ditt finner deg, og du lenker til produktet. Dette tar tid å bygge, men det er varig.(hvis aktuelt spør Aryan)</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <strong>E-postliste  den du eier selv</strong>
+          <p>Tilby noe gratis (en kortere versjon, en gratis mal) i bytte mot e-postadresse. En e-postliste er din  algoritmer kan ikke ta den fra deg. Send nyttig innhold, ikke bare salg.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <strong>Grupper og forum  vær hjelpsom</strong>
+          <p>Delta i Facebook-grupper, Reddit eller Discord der målgruppen din er. Hjelp folk, svar på spørsmål, og ha lenke til profilen din. Ikke spam  vær genuint nyttig.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Betalt markedsføring  når og hvordan</h3>
+    <p>Ikke start med betalt annonsering før du vet at produktet selger organisk. Annonser forsterker det som allerede virker  de fikser ikke noe som ikke virker.</p>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Gjør dette ETTER organisk salg</div>
+        <ul>
+          <li>Meta-annonser (Facebook/Instagram)</li>
+          <li>Pinterest-annonser</li>
+          <li>Google Shopping (for maler)</li>
+          <li>Samarbeid med micro-influencere</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Hva du tester med annonser</div>
+        <ul>
+          <li>Start med 50–100 kr/dag</li>
+          <li>Test to ulike annonsetekster</li>
+          <li>Fokus på én målgruppe om gangen</li>
+          <li>Mål kostnad per salg (CPA)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <p><strong>Viktigste markedsføringsregel:</strong> Konverterings-siden (produktsiden din) må være god. Mange kjøpere besøker siden og kjøper ikke  da hjelper det ikke å sende mer trafikk. Fiks siden først.</p>
+    </div>
+
+    <h3>Hva en god produktside inneholder</h3>
+    <ul class="checklist">
+      <li><span class="check-icon"></span>Klar tittel  hva produktet er og hvem det er for</li>
+      <li><span class="check-icon"></span>Konkret liste over hva du får (ikke vage fordeler)</li>
+      <li><span class="check-icon"></span>Minst én anmeldelse eller testimonial  selv fra beta-testere</li>
+      <li><span class="check-icon"></span>Et preview / bilde av selve produktet</li>
+      <li><span class="check-icon"></span>Tydelig pris og én enkel kjøpsknapp</li>
+      <li><span class="check-icon"></span>Svar på det vanligste spørsmålet ("passer dette for meg?")</li>
+    </ul>
+  </section>
+
+  <!-- SECTION 8 -->
+  <section class="section" id="s8">
+    <div class="section-header">
+      <span class="section-number">08</span>
+      <h2>Det juridiske</h2>
+    </div>
+
+    <p>Kjedelig, men viktig. Her er minimumskravene  ikke en fullstendig juridisk gjennomgang, men det du må forholde deg til i Norge.</p>
+
+    <h3>Enkeltpersonforetak (ENK)</h3>
+    <p>Hvis du tjener penger, skal det betales skatt. Du registrerer enkeltpersonforetak gratis på <code>brreg.no</code>. Det tar 5 minutter. Du kan drive uten foretaksregistrering til du tjener over 50 000 kr (da er du lovpålagt), men registrer deg tidlig så du er ryddig fra starten.</p>
+
+    <h3>MVA  merverdiavgift</h3>
+    <p>Du er MVA-pliktig når omsetningen overstiger <strong>50 000 kr per år</strong>. Under dette trenger du ikke å legge på moms. Når du passerer grensen, registrerer du deg i MVA-registeret og legger 25% moms på prisen.</p>
+
+    <div class="warning">
+      <p><strong>Viktig for internasjonale salg:</strong> Gumroad og de fleste plattformer håndterer EU-moms (MOSS/OSS) automatisk. Sjekk at plattformen din gjør dette  ellers kan du bli ansvarlig for å rapportere moms i hvert EU-land separat.</p>
+    </div>
+
+    <h3>Personvern (GDPR)</h3>
+    <p>Samler du e-postadresser? Da gjelder GDPR. Det betyr at du trenger et samtykkefelt ved registrering, en enkel personvernerklæring, og du kan ikke sende spam. Bruk et e-postverktøy som Mailchimp eller ConvertKit  de har innebygde verktøy for dette.</p>
+
+    <h3>Opphavsrett</h3>
+    <p>Det du lager er ditt. Du eier rettighetene automatisk. Det er lurt å skrive det eksplisitt i produktet: "Kjøp gir rett til personlig bruk. Videresal, deling eller kopiering er ikke tillatt." Holder det fra å bli misbrukt av de fleste.</p>
+
+    <div class="highlight">
+      <p><strong>Ressurser:</strong> <code>altinn.no</code> for skatt og ENK, <code>brreg.no</code> for registrering, <code>skatteetaten.no</code> for MVA. Alt er på norsk og relativt greit å forstå.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 9 -->
+  <section class="section" id="s9">
+    <div class="section-header">
+      <span class="section-number">09</span>
+      <h2>Vanlige feil</h2>
+    </div>
+
+    <p>Disse ser vi igjen og igjen. Les dem og unngå dem.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-content">
+          <strong><span class="tag tag-red">Feil 1</span> Lage produktet uten å validere etterspørsel</strong>
+          <p>Bruker 4 uker på å lage en e-bok, for så å oppdage at ingen vil betale for det. Sjekk markedet <em>først</em>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <strong><span class="tag tag-red">Feil 2</span> Vente på å få det perfekt(les dette to ganger Ida)</strong>
+          <p>Slipper aldri produktet fordi det "ikke er helt klart ennå". Gi ut noe godt, samle tilbakemeldinger. Versjon 1 er alltid dårligst det er greit.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <strong><span class="tag tag-red">Feil 3</span> Prise for lavt av usikkerhet</strong>
+          <p>Tenker "hvem vil betale 300 kr for en PDF?"  det vil noen, hvis den løser et problem. Lav pris sender feil signal om kvalitet.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <strong><span class="tag tag-red">Feil 4</span> Lage et nytt produkt når det første ikke selger</strong>
+          <p>Problemet er sjelden produktet  det er synligheten. Lær å markedsføre det du har, før du lager noe nytt.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <strong><span class="tag tag-red">Feil 5</span> Fokusere på alle plattformer samtidig</strong>
+          <p>TikTok, Instagram, Pinterest, SEO, e-post  alt på én gang. Velg én kanal, bli god på den, så utvid. Spres du for tynt, gjør du ingenting bra.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-content">
+          <strong><span class="tag tag-red">Feil 6</span> Kopiere konkurrenter direkte</strong>
+          <p>Se på hva som selger, men lag noe ditt eget med din vinkel. En direkte kopi selger dårligere og er ofte brudd på opphavsrett.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 10 -->
+  <section class="section" id="s10">
+    <div class="section-header">
+      <span class="section-number">10</span>
+      <h2>Kom i gang  nå</h2>
+    </div>
+
+    <p>Du trenger ikke mer informasjon. Du trenger en plan og en deadline. Her er den.</p>
+
+    <h3>Uke 1  Bestem og valider</h3>
+    <ul class="checklist">
+      <li><span class="check-icon"></span>Skriv ned 3 produktidéer  velg den du vet mest om</li>
+      <li><span class="check-icon"></span>Bruk 2 timer på å sjekke etterspørsel (Google Trends, Etsy, Reddit)</li>
+      <li><span class="check-icon"></span>Definer målgruppen på én setning</li>
+      <li><span class="check-icon"></span>Spør 5 personer om de ville betalt for det, og til hvilken pris</li>
+    </ul>
+
+    <h3>Uke 2–3  Lag produktet</h3>
+    <ul class="checklist">
+      <li><span class="check-icon"></span>Lag en innholdsplan / struktur før du skriver</li>
+      <li><span class="check-icon"></span>Bruk Canva for design  hold det enkelt og ryddig</li>
+      <li><span class="check-icon"></span>Ha minst én person til å lese/teste det</li>
+      <li><span class="check-icon"></span>Eksporter som PDF, test at filen åpnes riktig</li>
+    </ul>
+
+    <h3>Uke 4  Sett opp og lanser</h3>
+    <ul class="checklist">
+      <li><span class="check-icon"></span>Opprett konto på Gumroad eller Payhip</li>
+      <li><span class="check-icon"></span>Skriv en produktbeskrivelse  bruk malen fra seksjon 7</li>
+      <li><span class="check-icon"></span>Last opp produktet og sett prisen</li>
+      <li><span class="check-icon"></span>Publiser og del linken  til venner, familie, sosiale medier</li>
+      <li><span class="check-icon"></span>Spør etter tilbakemeldinger fra de første kjøperne</li>
+    </ul>
+
+    <div class="cta-block">
+      <h2>Ferdig med å lese?</h2>
+      <p>Da er det én ting igjen å gjøre. Start. Det første salget er det eneste som faktisk beviser at det virker  og det salget kommer ikke av å lese mer guider.</p>
+    </div>
+  </section>
+
+</main>
+
+<section style="max-width:860px; margin:0 auto; padding:4rem 2rem 6rem; text-align:center;">
+  <div style="border:1px solid #2a2a2a; border-radius:6px; padding:3rem 2rem; background:#111;">
+    <div style="font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.18em; color:#888; text-transform:uppercase; margin-bottom:1.5rem;">!!</div>
+    <div style="font-family:'Bebas Neue',sans-serif; font-size:clamp(3rem,10vw,6rem); line-height:0.9; color:#e8ff47; margin-bottom:1.5rem;">
+      Lykke<br>til! Ida
+    </div>
+    <p style="color:#c8c4be; font-size:1rem; max-width:520px; margin:0 auto 1rem; line-height:1.8;">
+      Du har det som skal til. Det handler ikke om å ha alt klart fra dag én  det handler om å faktisk starte og justere underveis. De fleste snakker om idéene sine. Du er en av de som gjør noe med det.
+    </p>
+    <p style="color:#888; font-size:0.9rem; max-width:480px; margin:0 auto 1.5rem; line-height:1.8;">
+      Første salg er det beste. Ingenting slår følelsen av at noen faktisk betaler for noe du har laget. Det skjer  hvis du lar det skje.
+    </p>
+    <p style="color:#888; font-size:0.88rem; font-family:'DM Mono',monospace;">
+      Du klarer dette. 🤙
+    </p>
+  </div>
+</section>
+
+
+</body>
+</html>
